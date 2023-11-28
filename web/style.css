@@ -1,161 +1,223 @@
+/* colors */
 :root {
-    --bg-color: #ddd;
-    --p-color: #333;
-    --a-color: Teal;
-    --a-hover-color: LightSeaGreen;
-    --citation-bg-color: #1E0519;
-    --citation-p-color: Salmon;
-    --citation-a-color: MediumVioletRed;
-    --citation-a-hover-color: DeepPink;
+    --lightsOnBg: #FEF4AD;
+    --lightsOutBg: #F8AE39;
+    --candleColor: #FFFFFD;
+    --candleShadow: #673C63;
+    --floorColor: #AD9598;
+    --fireColor: #FF9800;
+    --fireColor2: #FFC107;
+    --fireShadow: #E7C980;
+    --angerColor: #F44336;
+    --primaryColor: #FEF4AD;
+    --secondaryColor: rgb(0, 0, 0);
+    --candleInsetShadow: #95c6f2;
+    --smokeColor: grey;
   }
   
-  html {
-    box-sizing: border-box;
-  }
-  
-  *, *::before, *::after {
-    box-sizing: inherit;
-    &:focus {
-      outline: none;
-    }
-  }
-  
-  * {
-    font-family: monaco, courier;
+  /* sizes */
+  :root {
+    --floorWidth: 350px;
+    --floorHeight: 5px;
+    --candleWidth: 35px;
+    --candleHeight: 100px;
+    --stickWidth: 3px;
+    --stickHeight: 15px;
   }
   
   body {
-    margin: 0;
-    padding: 0;
+    background-color: var(--lightsOnBg);
+    animation: change-background 3s infinite linear;
   }
   
   .wrapper {
-    width: 100%;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    overflow: auto;
-    background: var(--bg-color); 
+    position: absolute;
+    left: 50%;
+    top: 70%;
+    transform: scale(1.5, 1.5) translate(-50%, -50%);
   }
   
-  .ciao-frames {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    align-items: center;
-    justify-items: center;
-    justify-content: space-evenly;
-    width: 80%;
-    max-width: 800px;
-    height: 400px;
+  .floor {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: var(--floorWidth);
+    height: var(--floorHeight);
+    background: var(--candleShadow);
+    transform: translate(-50%, -50%);
+    box-shadow: 0px 2px 5px #111;
+    z-index: 2;
   }
-  .frame {
-    width: 400px;
-    height: 200px;
-    margin: 2px;
+  
+  .candles {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 250px;
+    height: 150px;
+    transform: translate(-50%, -100%);
+    z-index: 1;
+  }
+  
+  .candle1 {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: var(--candleWidth);
+    height: var(--candleHeight);
+    background: #fff;
+    border: 3px solid var(--candleShadow);
+    border-bottom: 0px;
+    border-radius: 3px;
+    transform-origin: center right;
+    transform: translate(60%, -25%);
+    box-shadow: -2px 0px 0px var(--candleInsetShadow) inset;
+    animation: expand-body 3s infinite linear;
+  }
+  
+  .candle1__stick,
+  .candle2__stick {
+    position: absolute;
+    left: 50%;
+    top: 0%;
+    width: var(--stickWidth);
+    height: var(--stickHeight);
+    background: var(--candleShadow);
+    border-radius: 8px;
+    transform: translate(-50%, -100%);
+  }
+  
+  .candle2__stick {
+    height: calc(var(--stickHeight) * 0.8);
+    transform-origin: bottom center;
+    animation: stick-animation 3s infinite linear;
+  }
+  
+  .candle1__eyes,
+  .candle2__eyes {
+    position: absolute;
+    left: 50%;
+    top: 0%;
+    width: var(--candleWidth);
+    height: 30px;
+    transform: translate(-50%, 0%);
+  }
+  
+  .candle1__eyes-one,
+  .candle1__eyes-two {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    border-radius: 100%;
+    background: var(--candleShadow);
+    transform: translate(-70%, 0%);
+    animation: blink-eyes 3s infinite linear;
+  }
+  
+  .candle1__mouth {
+    position: absolute;
+    left: 40%;
+    top: 20%;
+    width: 0px;
+    height: 0px;
+    border-radius: 20px;
+    background: var(--candleShadow);
+    transform: translate(-50%, -50%);
+    animation: uff 3s infinite linear;
+  }
+  
+  .candle__smoke-one {
+    position: absolute;
+    left: 30%;
+    top: 50%;
+    width: 30px;
+    height: 3px;
+    background: var(--smokeColor);
+    transform: translate(-50%, -50%);
+    animation: move-left 3s infinite linear;
+  }
+  
+  .candle__smoke-two {
+    position: absolute;
+    left: 30%;
+    top: 40%;
+    width: 10px;
+    height: 10px;
+    border-radius: 10px;
+    background: var(--smokeColor);
+    transform: translate(-50%, -50%);
+    animation: move-top 3s infinite linear;
+  }
+  
+  .candle2 {
+    position: absolute;
+    left: 20%;
+    top: 65%;
+    width: calc(var(--candleWidth) * 1.20);
+    height: calc(var(--candleHeight) * 0.60);
+    background: #fff;
+    border: 3px solid var(--candleShadow);
+    border-bottom: 0px;
+    border-radius: 3px;
+    transform: translate(60%, -15%);
+    transform-origin: center right;
+    box-shadow: -2px 0px 0px var(--candleInsetShadow) inset;
+    animation: shake-left 3s infinite linear;
+  }
+  
+  .candle2__eyes-one,
+  .candle2__eyes-two {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    display: inline-block;
+    border: 0px solid var(--candleShadow);
+    border-radius: 100%;
+    float: left;
+    background: var(--candleShadow);
+    transform: translate(-80%, 0%);
+    animation: changeto-lower 3s infinite linear;
+  }
+  
+  .candle2__fire {
+    position: absolute;
+    top: 50%;
+    left: 40%;
     display: block;
-    border: 1px solid white;
-    background: transparent url("https://assets.codepen.io/219932/ciao-frames.png") 0 0 no-repeat;
-  }
-  #one {
-    -webkit-animation: letterC 1s steps(12) infinite;
-            animation: letterC 1s steps(12) infinite;
-  }
-  #two {
-    -webkit-animation: letterI 1s steps(12) infinite;
-            animation: letterI 1s steps(12) infinite;
-  }
-  #three {
-    -webkit-animation: letterA 1s steps(12) infinite;
-            animation: letterA 1s steps(12) infinite;
-  }
-  #four {
-    -webkit-animation: letterO 1s steps(12) infinite;
-            animation: letterO 1s steps(12) infinite;
-  }
-  @-webkit-keyframes letterC {
-    0% {
-      background-position: 0 0;
-    }
-    100% {
-      background-position: 0 -2400px;
-    }
-  }
-  @keyframes letterC {
-    0% {
-      background-position: 0 0;
-    }
-    100% {
-      background-position: 0 -2400px;
-    }
-  }
-  @-webkit-keyframes letterI {
-    0% {
-      background-position: -400px 0;
-    }
-    100% {
-      background-position: -400px -2400px;
-    }
-  }
-  @keyframes letterI {
-    0% {
-      background-position: -400px 0;
-    }
-    100% {
-      background-position: -400px -2400px;
-    }
-  }
-  @-webkit-keyframes letterA {
-    0% {
-      background-position: -800px 0;
-    }
-    100% {
-      background-position: -800px -2400px;
-    }
-  }
-  @keyframes letterA {
-    0% {
-      background-position: -800px 0;
-    }
-    100% {
-      background-position: -800px -2400px;
-    }
-  }
-  @-webkit-keyframes letterO {
-    0% {
-      background-position: -1200px 0;
-    }
-    100% {
-      background-position: -1200px -2400px;
-    }
-  }
-  @keyframes letterO {
-    0% {
-      background-position: -1200px 0;
-    }
-    100% {
-      background-position: -1200px -2400px;
-    }
+    width: 16px;
+    height: 20px;
+    background-color: var(--fireColor);
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    transform: translate(-50%, -50%);
+    animation: dance-fire 3s infinite linear;
   }
   
-  .citation {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    z-index: 100;
-    background: var(--citation-bg-color);
-    p {
-      margin: 0;
-      padding: 10px;
-      font-size: 12px;
-      color: var(--citation-p-color);
-      a {
-        color: var(--citation-a-color);
-        cursor: pointer;
-        &:hover {
-          color: var(--citation-a-hover-color);
-        }
-      }
-    }
+  .light__wave {
+    position: absolute;
+    top: 35%;
+    left: 35%;
+    width: 75px;
+    height: 75px;
+    border-radius: 100%;
+    z-index: 0;
+    transform: translate(-25%, -50%) scale(2.5, 2.5);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    animation: expand-light 3s infinite linear;
   }
+  
+  /* animations */
+  
+  /* animation for blinking eyes */
+  @keyframes blink-eyes {
+    0%, 35% {
+      opacity: 1;
+      transform: translate(-70%, 0%);
+    }
+    36%, 39% {
+      opacity: 0;
+      transform: translate(-70%, 0%);
+    }
+    40% {
+      opacity: 1;
+    }
+}
